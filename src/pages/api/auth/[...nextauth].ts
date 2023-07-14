@@ -39,6 +39,8 @@ export const authOptions: NextAuthOptions = {
                     ])
                   )
                 )
+
+                console.log("SESSION AKI", userActiveSubscription)
           
                 return {
                   ...session,

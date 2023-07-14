@@ -32,14 +32,14 @@ const relevantEvents = new Set([
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const buf = await buffer(req)
     const secret = req.headers['stripe-signature'] as string
 
     let event: Stripe.Event;
 
     try {
-      event = stripe.webhooks.constructEvent(buf, secret, process.env.STRIPE_WEBHOOK_SECRET as string);
+      event = stripe.webhooks.constructEvent(req.body, secret, process.env.STRIPE_WEBHOOK_SECRET as string);
     } catch (err: any) {
+      console.log(`Webhook error: ${err.message}`)
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 

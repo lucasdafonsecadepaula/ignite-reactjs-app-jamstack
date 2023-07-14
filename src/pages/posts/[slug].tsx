@@ -111,7 +111,6 @@ export default function Post({ post }: PostProps) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions) as any
   const { slug } = context.params as any;
-  console.log("SESSION GETSERVERSIDE", session)
   if (!session?.activeSubscription) {
     return {
       redirect: {
@@ -124,7 +123,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const prismic = getPrismicClient()
 
   const response = await prismic.getByUID('posts', String(slug), {})
-  console.log('response', response.data)
 
   const content = response.data.content.map((paragraph: any) => ({
     heading: paragraph.heading,

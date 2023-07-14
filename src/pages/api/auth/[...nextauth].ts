@@ -38,13 +38,11 @@ export const authOptions: NextAuthOptions = {
                       )
                     ])
                   )
-                )
+                ) as any
 
-                console.log("SESSION AKI", userActiveSubscription)
-          
                 return {
                   ...session,
-                  activeSubscription: userActiveSubscription
+                  activeSubscription: userActiveSubscription.data.status
                 }
               } catch {
                 return {

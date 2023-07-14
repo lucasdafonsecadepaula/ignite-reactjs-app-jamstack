@@ -30,7 +30,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err: any) {
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
-    console.log('EVENT', event)
 
     const { type } = event;
 
@@ -63,7 +62,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             throw new Error('Unhandled event.')
         }
       } catch (err) {
-        console.log('err', err)
         return res.json({ error: 'Webhook handler failed.' })
       }
     }

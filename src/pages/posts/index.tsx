@@ -20,9 +20,6 @@ interface PostsProps {
 }
 
 export default function Posts({ posts }: PostsProps) {
-  const { data } = useSession()
-
-  console.log('data', data)
   return (
     <>
       <Head>

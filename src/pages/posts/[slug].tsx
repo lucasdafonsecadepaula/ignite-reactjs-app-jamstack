@@ -111,6 +111,7 @@ export default function Post({ post }: PostProps) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions) as any
   const { slug } = context.params as any;
+  console.log("SESSION GETSERVERSIDE", session)
   if (!session?.activeSubscription) {
     return {
       redirect: {

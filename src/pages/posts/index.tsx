@@ -4,6 +4,7 @@ import Prismic from '@prismicio/client'
 import Link from 'next/link';
 
 import { getPrismicClient } from '../../services/prismic';
+import { useSession } from "next-auth/react"
 
 import styles from './styles.module.css';
 
@@ -19,6 +20,9 @@ interface PostsProps {
 }
 
 export default function Posts({ posts }: PostsProps) {
+  const { data } = useSession()
+
+  console.log('data', data)
   return (
     <>
       <Head>

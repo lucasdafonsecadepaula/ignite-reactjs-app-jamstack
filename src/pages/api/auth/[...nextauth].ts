@@ -1,11 +1,11 @@
 import { query as q } from 'faunadb'
 
-import NextAuth from 'next-auth'
+import NextAuth, { NextAuthOptions } from 'next-auth'
 import GithubProvider from "next-auth/providers/github"
 
 import { fauna } from '../../../services/fauna';
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_CLIENT_ID as string,
@@ -15,43 +15,25 @@ export default NextAuth({
         }),
     ],
     callbacks: {
-        async session({ session }) {
-
-            if (!session.user?.email) {
-                return {
-                    ...session,
-                    activeSubscription: null,
-                }
-            }
-
+        async session({ session }: any) {
             try {
-                const userActiveSubscription = await fauna.query(
+                console.log("AKI")
+                const user = await fauna.query(
                     q.Get(
-                        q.Intersection([
-                            q.Match(
-                                q.Index('subscription_by_user_ref'),
-                                q.Select(
-                                    "ref",
-                                    q.Get(
-                                        q.Match(
-                                            q.Index('user_by_email'),
-                                            q.Casefold(session.user.email)
-                                        )
-                                    )
-                                )
-                            ),
-                            q.Match(
-                                q.Index('subscription_by_status'),
-                                "active"
-                            )
-                        ])
+                      q.Match(
+                        q.Index('user_by_email'),
+                        q.Casefold(session?.user?.email ?? '')
+                      )
                     )
-                )
+                  ) as any
 
-                return {
-                    ...session,
-                    activeSubscription: userActiveSubscription
-                }
+                console.log("userActiveSubscription", user)
+
+                session.activeSubscription = user?.data.status ?? null
+
+                console.log("ESSE", session)
+
+                return session
             } catch {
                 return {
                     ...session,
@@ -94,4 +76,7 @@ export default NextAuth({
             }
         },
     }
-})
+}
+
+
+export default NextAuth(authOptions)

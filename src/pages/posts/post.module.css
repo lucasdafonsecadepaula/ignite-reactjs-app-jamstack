@@ -53,3 +53,74 @@
 .continueReading a:hover {
   text-decoration: underline;
 }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 4rem;
+  overflow-x: hidden;
+}
+.container {
+  width: 100%;
+}
+.header {
+	 padding: 2.4rem 0;
+}
+ .banner {
+	 height: 400px;
+	 width: 100%;
+	 position: relative;
+}
+ .banner img {
+	 position: absolute;
+	 left: 50%;
+	 transform: translateX(-50%);
+	 height: 100%;
+	 width: 100vw;
+	 object-fit: cover;
+}
+ .tags {
+	 display: flex;
+	 gap: 1.5rem;
+	 margin-top: 1.5rem;
+	 color: var(--text-info);
+	 font-size: 0.875rem;
+	 font-weight: 600;
+}
+ .tags span {
+	 display: flex;
+	 align-items: center;
+	 gap: 0.5rem;
+}
+ .main {
+	 margin-top: 5rem;
+}
+ .title {
+	 color: var(--text-heading);
+	 font-size: 3rem;
+	 font-weight: 700;
+	 letter-spacing: -0.5px;
+	 line-height: 120%;
+}
+ .subject {
+	 margin-top: 5rem;
+}
+ .subjectBlock {
+	 margin-bottom: 4rem;
+	 display: flex;
+	 flex-direction: column;
+	 gap: 2rem;
+}
+ .subjectBlock h5 {
+	 font-weight: 700;
+	 font-size: 2.25rem;
+	 line-height: 140%;
+	 color: var(--text-heading);
+	 margin-bottom: 1.75rem;
+}
+ .subjectBlock p {
+	 line-height: 140%;
+	 font-size: 1.125rem;
+	 color: var(--text-body);
+}
+ 
